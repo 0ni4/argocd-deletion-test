@@ -11,7 +11,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/0ni4/argocd-deletion-test.git   # ★Git URL に変更
-    path: manifest                                            # ← デプロイ対象は manifest/ 配下
+    path: prune-demo/manifest                                            # ← デプロイ対象は manifest/ 配下
     targetRevision: main
   syncPolicy:
     automated:
