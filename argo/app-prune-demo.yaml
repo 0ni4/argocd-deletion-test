@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prune-demo
+  namespace: argocd
+  finalizers: ["resources-finalizer.argocd.argoproj.io"]
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: prune-demo
+  project: default
+  source:
+    repoURL: https://github.com/0ni4/argocd-deletion-test.git   # ★Git URL に変更
+    path: manifest                                            # ← デプロイ対象は manifest/ 配下
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - PrunePropagationPolicy=background
